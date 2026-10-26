@@ -78,7 +78,7 @@ const S = {
   kPauseKeys: ["Pause button · P · Esc", "暂停按钮 · P · Esc"],
   kSound: ["Sound on / off", "声音开 / 关"],
   kSoundKeys: ["Sound button · M", "声音按钮 · M"],
-  footCredits: ["Lumen Courier · 流光信使 — original art, music and code · © 2026 connect-world-1985-ai", "流光信使 · Lumen Courier — 原创美术、音乐与代码 · © 2026 connect-world-1985-ai"],
+  footCredits: ["Lumen Courier · 流光信使 — original art, music and code · © 2026 · An original game", "流光信使 · Lumen Courier — 原创美术、音乐与代码 · © 2026 · 一款原创游戏"],
   license: ["MIT License", "MIT 许可证"],
   fontsCredit: ["Fonts: Cinzel and Noto Serif SC, SIL Open Font License 1.1", "字体：Cinzel 与 Noto Serif SC，SIL 开源字体许可 1.1"],
   privacy: ["No analytics, no tracking, no accounts.", "无统计、无追踪、无账号。"]

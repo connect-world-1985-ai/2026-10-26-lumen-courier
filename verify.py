@@ -43,6 +43,9 @@ for name in runtime + site + ["play/tests.html", "play/tests.mjs"]:
     if name.endswith(".html"):
         assert not re.search(r'(?:src|href|poster)\s*=\s*[\"\']/', text), "Root asset path: " + name
         assert "2026-10-26-lumen-courier/" not in text, "Host-specific path: " + name
+    # Raymond will self-host: no Pages URL or account name in the shipped site.
+    if name in site:
+        assert not re.search(r"github\.io|connect-world", text, re.I), "Host or account name in site file: " + name
 mp4 = (ROOT / "media/trailer.mp4").stat().st_size
 assert mp4 <= 15 * 1024 * 1024, f"Trailer too large: {mp4}"
 cine = (ROOT / "media/cinematic-trailer.mp4").stat().st_size
