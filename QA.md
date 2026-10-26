@@ -33,3 +33,14 @@ Legend: ✅ passed in Chrome desktop + Chrome phone emulation · ⏳ not run (ne
 | Q21 | ⏳ | Human first-time playtest not done (automated play only) |
 
 Not tested: desktop Safari, Firefox, Edge; real iPhone Safari; real Android Chrome.
+
+## Live verification (GitHub Pages), source commit 10c6b6de37364a668620e73de879188410e03571
+| Check | Result |
+|---|---|
+| `/`, `/play/`, every game module, `/media/trailer.mp4`, poster, screenshots, `/LICENSE` | HTTP 200, JS served as `text/javascript`, MP4 as `video/mp4` |
+| Game at `/play/`: desktop 1440×900 and Chrome `Pixel 7` emulation, en-US and zh-CN | Starts on click, Space or tap; courier flaps; score goes up; game over; restart works. Pause freezes; language toggle persists; no console errors or failed requests. AudioContext is created only after the first gesture, with exactly 1 context and 1 music source |
+| Website: same four configurations | Correct language on load; EN/中文 toggle works and persists (shared with the game); no horizontal overflow; "Play now" opens `./play/` |
+| Trailer in page | `video.play()` OK, currentTime advanced about 2.4 s in 2.5 s, no media error, 1280×720, 42.5 s |
+| Trailer file | H.264 High 1280×720 + AAC LC 44.1 kHz, 42.5 s, 3,224,739 bytes, moov before mdat (faststart) |
+| External references in the served site | None (only the SVG XML namespace identifier) |
+| Tests page on Pages | 77 / 77 pass; perf 20 s: 60.0 fps, p95 interval 16.7 ms |
