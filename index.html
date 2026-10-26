@@ -6,60 +6,83 @@
 <meta name="theme-color" content="#091B26">
 <title>Lumen Courier · 流光信使</title>
 <meta name="description" content="">
+<meta property="og:title" content="Lumen Courier · 流光信使">
+<meta property="og:type" content="website">
+<meta property="og:image" content="./media/launch/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="./play/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="./fonts/Cinzel-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="./site.css">
 <script type="module" src="./site.mjs"></script>
 </head>
 <body>
-<header class="topbar">
-  <a class="brand" href="./"><span class="brand-mark" aria-hidden="true"></span><span data-i18n="name"></span></a>
+<header class="topbar" id="topbar">
+  <a class="brand" href="./"><span class="brand-mark" aria-hidden="true"></span><span class="brand-en">Lumen Courier</span> <span class="brand-zh" lang="zh-CN">流光信使</span></a>
   <nav class="topnav" data-i18n-aria="navLabel">
-    <a href="#trailer" data-i18n="navTrailer"></a>
-    <a href="#screens" data-i18n="navScreens"></a>
-    <a href="#how" data-i18n="navHow"></a>
+    <a class="navlink" href="#trailer" data-i18n="navTrailer"></a>
+    <a class="navlink" href="#posters" data-i18n="navPosters"></a>
+    <a class="navlink" href="#gameplay" data-i18n="navGameplay"></a>
+    <a class="navlink" href="#how" data-i18n="navHow"></a>
     <button type="button" id="langBtn" class="lang"><span class="lang-en">EN</span> / <span class="lang-zh">中文</span></button>
+    <a class="btn primary small-btn" href="./play/" data-i18n="playNow"></a>
   </nav>
 </header>
 <main>
-  <section class="hero">
+  <section class="hero" id="trailer">
+    <video id="heroVideo" class="hero-video" muted loop playsinline preload="metadata" poster="./media/cinematic-trailer-poster.jpg" width="1280" height="720" data-i18n-aria="altHeroVideo" tabindex="-1">
+      <source src="./media/cinematic-trailer-hero.mp4" type="video/mp4">
+    </video>
+    <div class="hero-scrim" aria-hidden="true"></div>
     <div class="hero-text">
-      <p class="eyebrow" data-i18n="eyebrow"></p>
-      <h1><span class="title-en">Lumen Courier</span><span class="title-zh">流光信使</span></h1>
+      <p class="pill" data-i18n="nowPlaying"></p>
+      <h1><img class="wordmark" src="./media/launch/lumen-courier-wordmark-combo.svg" width="540" height="141" alt="Lumen Courier · 流光信使"></h1>
       <p class="tagline" data-i18n="tagline"></p>
-      <p class="lede" data-i18n="lede"></p>
       <div class="cta">
         <a class="btn primary" href="./play/" data-i18n="playNow"></a>
-        <a class="btn secondary" href="#trailer" data-i18n="watchTrailer"></a>
+        <button type="button" class="btn ghost" id="watchBtn" data-i18n="watchTrailer"></button>
       </div>
       <p class="small muted" data-i18n="freeNote"></p>
     </div>
-    <div class="hero-art">
-      <img src="./media/screenshot-play-en.jpg" width="540" height="960" data-i18n-alt="altPlay" alt="">
-    </div>
+    <button type="button" class="hero-play" id="heroPlay" hidden data-i18n="playTrailer"></button>
+    <button type="button" class="sound" id="soundBtn" aria-pressed="false"><span class="sound-ico" aria-hidden="true">🔈</span> <span id="soundLabel" data-i18n="soundOff"></span></button>
   </section>
 
-  <section id="trailer" class="section">
-    <h2 data-i18n="trailerTitle"></h2>
+  <section id="posters" class="section">
+    <p class="kicker" data-i18n="kickerPosters"></p>
+    <h2 data-bi="postersTitle"></h2>
+    <ul class="posters" id="posterGrid">
+      <li><button type="button" class="tile" data-index="0"><picture><source srcset="./media/posters/poster-01-key-art.webp" type="image/webp"><img src="./media/posters/poster-01-key-art.jpg" width="1200" height="1800" loading="lazy" decoding="async" data-i18n-alt="altPoster1" alt=""></picture><span class="cap" data-i18n="capKeyArt"></span><span class="zoom" aria-hidden="true">⤢</span></button></li>
+      <li><button type="button" class="tile" data-index="1"><picture><source srcset="./media/posters/poster-02-character.webp" type="image/webp"><img src="./media/posters/poster-02-character.jpg" width="1200" height="1800" loading="lazy" decoding="async" data-i18n-alt="altPoster2" alt=""></picture><span class="cap" data-i18n="capCourier"></span><span class="zoom" aria-hidden="true">⤢</span></button></li>
+      <li><button type="button" class="tile" data-index="2"><picture><source srcset="./media/posters/poster-03-now-playing.webp" type="image/webp"><img src="./media/posters/poster-03-now-playing.jpg" width="1200" height="1800" loading="lazy" decoding="async" data-i18n-alt="altPoster3" alt=""></picture><span class="cap" data-i18n="capNowPlaying"></span><span class="zoom" aria-hidden="true">⤢</span></button></li>
+    </ul>
+    <ul class="stills">
+      <li><button type="button" class="tile" data-index="3"><picture><source srcset="./media/launch/still-02-city-of-windows.webp" type="image/webp"><img src="./media/launch/still-02-city-of-windows.jpg" width="1920" height="1080" loading="lazy" decoding="async" data-i18n-alt="altStill02" alt=""></picture><span class="zoom" aria-hidden="true">⤢</span></button></li>
+      <li><button type="button" class="tile" data-index="4"><picture><source srcset="./media/launch/still-03-the-gates.webp" type="image/webp"><img src="./media/launch/still-03-the-gates.jpg" width="1920" height="1080" loading="lazy" decoding="async" data-i18n-alt="altStill03" alt=""></picture><span class="zoom" aria-hidden="true">⤢</span></button></li>
+      <li><button type="button" class="tile" data-index="5"><picture><source srcset="./media/launch/still-05-the-squeeze.webp" type="image/webp"><img src="./media/launch/still-05-the-squeeze.jpg" width="1920" height="1080" loading="lazy" decoding="async" data-i18n-alt="altStill05" alt=""></picture><span class="zoom" aria-hidden="true">⤢</span></button></li>
+      <li><button type="button" class="tile" data-index="6"><picture><source srcset="./media/launch/still-06-aurora-ascent.webp" type="image/webp"><img src="./media/launch/still-06-aurora-ascent.jpg" width="1920" height="1080" loading="lazy" decoding="async" data-i18n-alt="altStill06" alt=""></picture><span class="zoom" aria-hidden="true">⤢</span></button></li>
+    </ul>
+  </section>
+
+  <section id="gameplay" class="section">
+    <p class="kicker" data-i18n="kickerGameplay"></p>
+    <h2 data-bi="gameplayTitle"></h2>
     <p class="muted" data-i18n="trailerText"></p>
     <div class="video-wrap">
       <video id="trailerVideo" controls playsinline preload="metadata" poster="./media/trailer-poster.jpg" width="1280" height="720">
         <source src="./media/trailer.mp4" type="video/mp4">
       </video>
     </div>
+    <p class="small muted cine-link"><span data-i18n="cineLinkText"></span> <a href="./media/cinematic-trailer.mp4" data-i18n="cineLink"></a></p>
   </section>
 
-  <section id="screens" class="section">
-    <h2 data-i18n="screensTitle"></h2>
-    <div class="shots">
-      <figure><img src="./media/screenshot-ready-zh.jpg" width="540" height="960" loading="lazy" data-i18n-alt="altReady" alt=""><figcaption data-i18n="capReady"></figcaption></figure>
-      <figure><img src="./media/screenshot-play-en.jpg" width="540" height="960" loading="lazy" data-i18n-alt="altPlay" alt=""><figcaption data-i18n="capPlay"></figcaption></figure>
-      <figure><img src="./media/screenshot-play-zh.jpg" width="540" height="960" loading="lazy" data-i18n-alt="altPlayZh" alt=""><figcaption data-i18n="capPlayZh"></figcaption></figure>
-      <figure><img src="./media/screenshot-over-en.jpg" width="540" height="960" loading="lazy" data-i18n-alt="altOver" alt=""><figcaption data-i18n="capOver"></figcaption></figure>
-    </div>
-  </section>
+  <div class="band" aria-hidden="true">
+    <picture><source srcset="./media/launch/still-01-cold-open-sky.webp" type="image/webp"><img class="band-bg" src="./media/launch/still-01-cold-open-sky.jpg" width="1920" height="1080" loading="lazy" decoding="async" alt=""></picture>
+    <img class="band-mark" src="./media/launch/lumen-courier-wordmark-combo.svg" width="520" height="136" loading="lazy" alt="">
+  </div>
 
   <section id="features" class="section">
-    <h2 data-i18n="featuresTitle"></h2>
+    <p class="kicker" data-i18n="kickerFeatures"></p>
+    <h2 data-bi="featuresTitle"></h2>
     <ul class="features">
       <li><h3 data-i18n="f1t"></h3><p data-i18n="f1d"></p></li>
       <li><h3 data-i18n="f2t"></h3><p data-i18n="f2d"></p></li>
@@ -71,27 +94,45 @@
   </section>
 
   <section id="how" class="section">
-    <h2 data-i18n="howTitle"></h2>
-    <ol class="how">
-      <li data-i18n="how1"></li>
-      <li data-i18n="how2"></li>
-      <li data-i18n="how3"></li>
-      <li data-i18n="how4"></li>
-    </ol>
-    <table class="keys">
-      <caption class="sr-only" data-i18n="keysCaption"></caption>
-      <tbody>
-        <tr><th scope="row" data-i18n="kFlap"></th><td data-i18n="kFlapKeys"></td></tr>
-        <tr><th scope="row" data-i18n="kPause"></th><td data-i18n="kPauseKeys"></td></tr>
-        <tr><th scope="row" data-i18n="kSound"></th><td data-i18n="kSoundKeys"></td></tr>
-      </tbody>
-    </table>
+    <p class="kicker" data-i18n="kickerHow"></p>
+    <h2 data-bi="howTitle"></h2>
+    <div class="how-grid">
+      <div>
+        <ol class="how">
+          <li data-i18n="how1"></li>
+          <li data-i18n="how2"></li>
+          <li data-i18n="how3"></li>
+          <li data-i18n="how4"></li>
+        </ol>
+        <table class="keys">
+          <caption class="sr-only" data-i18n="keysCaption"></caption>
+          <tbody>
+            <tr><th scope="row" data-i18n="kFlap"></th><td data-i18n="kFlapKeys"></td></tr>
+            <tr><th scope="row" data-i18n="kPause"></th><td data-i18n="kPauseKeys"></td></tr>
+            <tr><th scope="row" data-i18n="kSound"></th><td data-i18n="kSoundKeys"></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <picture><source srcset="./media/launch/still-07-homecoming-island.webp" type="image/webp"><img class="how-art" src="./media/launch/still-07-homecoming-island.jpg" width="1920" height="1080" loading="lazy" decoding="async" data-i18n-alt="altStill07" alt=""></picture>
+    </div>
     <p class="cta center"><a class="btn primary" href="./play/" data-i18n="playNow"></a></p>
   </section>
 </main>
 <footer class="foot">
   <p data-i18n="footCredits"></p>
-  <p class="small muted"><a href="./LICENSE" data-i18n="license"></a> · <span data-i18n="privacy"></span></p>
+  <p class="small muted"><a href="./LICENSE" data-i18n="license"></a> · <span data-i18n="privacy"></span> · <span data-i18n="fontsCredit"></span> (<a href="./fonts/OFL-Cinzel.txt">Cinzel OFL</a>, <a href="./fonts/OFL-NotoSerifSC.txt">Noto Serif SC OFL</a>)</p>
 </footer>
+<dialog id="lightbox" class="lightbox" data-i18n-aria="lightboxLabel">
+  <div class="lb-frame">
+    <picture><source id="lbSource" type="image/webp"><img id="lbImg" alt=""></picture>
+    <p class="lb-cap" id="lbCap"></p>
+  </div>
+  <div class="lb-bar">
+    <button type="button" class="lb-btn" id="lbPrev" data-i18n-aria="prev">‹</button>
+    <a class="lb-btn lb-dl" id="lbDl" download data-i18n="download"></a>
+    <button type="button" class="lb-btn" id="lbNext" data-i18n-aria="next">›</button>
+    <button type="button" class="lb-btn lb-close" id="lbClose" data-i18n-aria="close">✕</button>
+  </div>
+</dialog>
 </body>
 </html>

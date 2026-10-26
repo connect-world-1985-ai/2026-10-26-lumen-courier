@@ -44,3 +44,23 @@ Not tested: desktop Safari, Firefox, Edge; real iPhone Safari; real Android Chro
 | Trailer file | H.264 High 1280×720 + AAC LC 44.1 kHz, 42.5 s, 3,224,739 bytes, moov before mdat (faststart) |
 | External references in the served site | None (only the SVG XML namespace identifier) |
 | Tests page on Pages | 77 / 77 pass; perf 20 s: 60.0 fps, p95 interval 16.7 ms |
+
+## Phase 2 — launch relaunch, LOCAL verification only (not yet published)
+Run on 2026-10-26 against the local preview (`python3 -B preview.py`, `http://127.0.0.1:4173/2026-10-26-lumen-courier/`), Chrome 156 headless via Playwright 1.64. The live GitHub Pages site was **not** checked in this phase (no contact with GitHub was allowed); it still shows the first release until this commit is pushed.
+
+| Check | Result |
+|---|---|
+| `python3 -B verify.py` | PASS: 56 required files, 33 local references resolve, game runtime 57,256 bytes, no network APIs, no external or absolute URLs |
+| `play/tests.html` | 77 / 77 pass (the game under `/play/` is unchanged) |
+| HTTP | 200 for `/`, `/play/`, both cinematic MP4s, the poster frame, `media/trailer.mp4` and its poster, all 6 poster files, all 13 `media/launch/` files, both fonts and both licences, `/LICENSE` |
+| `media/cinematic-trailer.mp4` | 40.000 s, 1200 frames, H.264 High 1280×720 30 fps + AAC LC 44.1 kHz stereo, moov before mdat, 6,061,208 bytes; −15.0 LUFS integrated, −1.9 dBFS peak |
+| `media/cinematic-trailer-hero.mp4` | same edit, textless, no letterbox; 40.000 s, 1200 frames, same codecs, faststart, 7,069,471 bytes |
+| Hero video (desktop 1440×900 and `Pixel 7`, en-US and zh-CN) | Autoplays muted, looped, inline; currentTime advanced about 2.5 s in 2.5 s; no media error; 1280×720, 40 s. Also autoplays with Chrome's default autoplay policy. Sound toggle unmutes (label switches to "Sound on / 声音已开", `aria-pressed=true`) and mutes again. On phones `object-position` is 68 % 50 % |
+| Reduced motion (`prefers-reduced-motion: reduce`) | No autoplay (paused at 0 s); "▶ Play trailer" shown; clicking it plays the video and hides the button |
+| Gallery | All 12 page images have `naturalWidth > 0` after scrolling (lazy loading). Poster and still tiles open the native `<dialog>`; focus goes to Close; ‹ / › and ← / → change images; Esc and Close shut it; focus returns to the opening tile; Download points at the JPG |
+| Gameplay trailer section | `media/trailer.mp4` plays (currentTime ≈ 1.9 s after 2 s), 1280×720, 42.5 s, no error |
+| Languages | en-US → English, zh-CN → 简体中文 (title, pill 现已上线, tagline, CTA **立即游玩**, sound label, captions, alt text); EN / 中文 toggle works and persists across reload; "Play now" opens `./play/` in the same language |
+| Fonts | Cinzel and Lumen Serif SC (Noto Serif SC subset) load from `fonts/` |
+| Console / network | No console errors, no failed requests, **no requests outside the site's own origin**, no horizontal overflow, in all four configurations |
+
+Not tested in phase 2: the live Pages deployment, Safari, Firefox, real phones, screen readers, slow or Save-Data connections (handled in code: `preload="none"` and no autoplay).

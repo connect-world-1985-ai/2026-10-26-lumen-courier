@@ -5,17 +5,24 @@ An original one-button twilight flying game for the browser, with bilingual Engl
 
 - **Website / 官网:** https://connect-world-1985-ai.github.io/2026-10-26-lumen-courier/
 - **Play / 游玩:** https://connect-world-1985-ai.github.io/2026-10-26-lumen-courier/play/
-- **Trailer / 预告片:** https://connect-world-1985-ai.github.io/2026-10-26-lumen-courier/media/trailer.mp4
+- **Cinematic trailer / 电影感预告片:** https://connect-world-1985-ai.github.io/2026-10-26-lumen-courier/media/cinematic-trailer.mp4
+- **Gameplay trailer / 实机预告:** https://connect-world-1985-ai.github.io/2026-10-26-lumen-courier/media/trailer.mp4
 
 ## What is where / 目录说明
 
 | Path | What it is |
 |---|---|
-| `/index.html`, `site.css`, `site.mjs` | Official website (hero, trailer, screenshots, features, how to play). 官网 |
+| `/index.html`, `site.css`, `site.mjs` | Official launch website: cinematic-trailer hero, posters + stills with a lightbox, gameplay trailer, brand band, features, how to play. 官网 |
 | `/play/` | The full game (static ES modules + Canvas 2D + Web Audio). 完整游戏 |
 | `/play/tests.html`, `tests.mjs` | Developer test page (core assertions + performance run). Not linked from the game. 开发测试页 |
-| `/media/trailer.mp4`, `trailer-poster.jpg` | 42.5 s launch trailer (1280×720 H.264 + AAC) cut from real gameplay, with burned-in EN/中文 captions, and its poster. 预告片与封面 |
-| `/media/screenshot-*.jpg` | Gameplay screenshots used on the website. 截图 |
+| `/media/cinematic-trailer.mp4` | 40.0 s cinematic launch trailer (1280×720 H.264 High 30 fps + AAC 44.1 kHz stereo, faststart, 2.39:1 letterbox until 0:35), cut on the beat of the game's own music, ending on the logo and Play now · 立即游玩. 电影感预告片 |
+| `/media/cinematic-trailer-hero.mp4` | The same 40 s edit and score, **textless and without the letterbox**, used as the muted looping background of the website hero (the page already shows the wordmark and the buttons on top). 官网首屏背景版 |
+| `/media/cinematic-trailer-poster.jpg` | Poster frame for the cinematic trailer (still 02, 1280×720). 封面 |
+| `/media/posters/` | The three launch posters (Key art, The Courier, Now Playing), 1200×1800, WebP + JPG. 海报 |
+| `/media/launch/` | Launch stills 01, 02, 03, 05, 06, 07 (1920×1080, WebP + JPG), the wordmark SVG and the 1200×630 social card `og-image.jpg`. 剧照、字标与分享图 |
+| `/fonts/` | Bundled web-font subsets and their licences (see *Fonts* below). 字体 |
+| `/media/trailer.mp4`, `trailer-poster.jpg` | 42.5 s gameplay trailer (1280×720 H.264 + AAC) cut from real gameplay, with burned-in EN/中文 captions, and its poster. 预告片与封面 |
+| `/media/screenshot-*.jpg` | Gameplay screenshots from the first release (kept; no longer shown on the website). 截图 |
 | `preview.py` | Local preview server that serves the repo under `/<repo-name>/`, like GitHub Pages. 本地预览 |
 | `verify.py` | Static release check (file list, size budget, no network APIs, no external or absolute URLs). 发布前静态检查 |
 | `ASSETS.md` | Where every asset comes from (all original, MIT). 资产来源 |
@@ -49,8 +56,19 @@ No build step, no npm, no dependencies.
 
 ## Accessibility & privacy / 无障碍与隐私
 
-All controls are native buttons, at least 44×44 CSS px, with a visible gold focus ring. State changes and the final score are announced to screen readers. It is still a visual reflex game, so it does not offer a non-visual equivalent. The site makes no network requests beyond its own files: no analytics, no tracking, no accounts, no fonts or CDNs. GitHub Pages itself may keep standard access logs.
+All controls are native buttons, at least 44×44 CSS px, with a visible gold focus ring. State changes and the final score are announced to screen readers. It is still a visual reflex game, so it does not offer a non-visual equivalent. The site makes no network requests beyond its own files: no analytics, no tracking, no accounts, no font services or CDNs (the two fonts are bundled files). GitHub Pages itself may keep standard access logs.
+
+## Fonts / 字体
+
+The website's display type uses two bundled subsets, loaded from `fonts/` with `@font-face` (no font services, no external requests). Body and UI text use the system font.
+
+| File | Face | Use | Licence |
+|---|---|---|---|
+| `fonts/Cinzel-latin.woff2` (34 KB) | Cinzel, variable 400–900, Latin subset | English display: caps headings, the pill, the tagline | SIL OFL 1.1, © 2020 The Cinzel Project Authors, `fonts/OFL-Cinzel.txt` |
+| `fonts/NotoSerifSC-lumen-subset.woff2` (198 KB) | Noto Serif SC, variable 200–900, 354-glyph subset (the site's and the art's 中文 display characters only) | 中文 display: headings, the pill, the tagline, the brand | SIL OFL 1.1, © 2012 Google Inc., `fonts/OFL-NotoSerifSC.txt` |
+
+Characters outside the subset fall back to the system serif. The wordmark, posters, stills and trailer cards already have their type drawn in, so they do not depend on these files.
 
 ## Licence / 许可
 
-MIT, © 2026 connect-world-1985-ai. See `LICENSE` and `ASSETS.md`. The trailer captions were rendered with the system Noto Sans CJK SC font (SIL OFL). That font is not included in this repository.
+MIT, © 2026 connect-world-1985-ai, except the bundled fonts, which stay under the SIL Open Font License 1.1 (see *Fonts*). See `LICENSE` and `ASSETS.md`. The gameplay-trailer captions were rendered with the system Noto Sans CJK SC font (SIL OFL). That font is not included in this repository.

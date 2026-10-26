@@ -8,3 +8,6 @@
 !media/
 !media/*.mp4
 !media/*.jpg
+!media/posters/
+!media/launch/
+!fonts/
