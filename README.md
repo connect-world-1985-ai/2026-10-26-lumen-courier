@@ -65,7 +65,7 @@ The website's display type uses two bundled subsets, loaded from `fonts/` with `
 | File | Face | Use | Licence |
 |---|---|---|---|
 | `fonts/Cinzel-latin.woff2` (34 KB) | Cinzel, variable 400–900, Latin subset | English display: caps headings, the pill, the tagline | SIL OFL 1.1, © 2020 The Cinzel Project Authors, `fonts/OFL-Cinzel.txt` |
-| `fonts/NotoSerifSC-lumen-subset.woff2` (198 KB) | Noto Serif SC, variable 200–900, 354-glyph subset (the site's and the art's 中文 display characters only) | 中文 display: headings, the pill, the tagline, the brand | SIL OFL 1.1, © 2012 Google Inc., `fonts/OFL-NotoSerifSC.txt` |
+| `fonts/NotoSerifSC-lumen-subset.woff2` (198 KB) | Noto Serif SC, variable 200–900, 354-character subset (the site's and the art's 中文 display characters only) | 中文 display: headings, the pill, the tagline, the brand | SIL OFL 1.1, © 2012 Google Inc., `fonts/OFL-NotoSerifSC.txt` |
 
 Characters outside the subset fall back to the system serif. The wordmark, posters, stills and trailer cards already have their type drawn in, so they do not depend on these files.
 

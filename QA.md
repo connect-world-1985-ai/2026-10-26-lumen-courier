@@ -52,7 +52,7 @@ Run on 2026-10-26 against the local preview (`python3 -B preview.py`, `http://12
 |---|---|
 | `python3 -B verify.py` | PASS: 56 required files, 33 local references resolve, game runtime 57,256 bytes, no network APIs, no external or absolute URLs |
 | `play/tests.html` | 77 / 77 pass (the game under `/play/` is unchanged) |
-| HTTP | 200 for `/`, `/play/`, both cinematic MP4s, the poster frame, `media/trailer.mp4` and its poster, all 6 poster files, all 13 `media/launch/` files, both fonts and both licences, `/LICENSE` |
+| HTTP | 200 for `/`, `/play/`, both cinematic MP4s, the poster frame, `media/trailer.mp4` and its poster, all 6 poster files, all 14 `media/launch/` files, both fonts and both licences, `/LICENSE` |
 | `media/cinematic-trailer.mp4` | 40.000 s, 1200 frames, H.264 High 1280×720 30 fps + AAC LC 44.1 kHz stereo, moov before mdat, 6,061,208 bytes; −15.0 LUFS integrated, −1.9 dBFS peak |
 | `media/cinematic-trailer-hero.mp4` | same edit, textless, no letterbox; 40.000 s, 1200 frames, same codecs, faststart, 7,069,471 bytes |
 | Hero video (desktop 1440×900 and `Pixel 7`, en-US and zh-CN) | Autoplays muted, looped, inline; currentTime advanced about 2.5 s in 2.5 s; no media error; 1280×720, 40 s. Also autoplays with Chrome's default autoplay policy. Sound toggle unmutes (label switches to "Sound on / 声音已开", `aria-pressed=true`) and mutes again. On phones `object-position` is 68 % 50 % |
@@ -64,3 +64,9 @@ Run on 2026-10-26 against the local preview (`python3 -B preview.py`, `http://12
 | Console / network | No console errors, no failed requests, **no requests outside the site's own origin**, no horizontal overflow, in all four configurations |
 
 Not tested in phase 2: the live Pages deployment, Safari, Firefox, real phones, screen readers, slow or Save-Data connections (handled in code: `preload="none"` and no autoplay).
+
+| Further phase-2 checks | Result |
+|---|---|
+| gitleaks 8.30.1, `gitleaks git` (all commits) and `gitleaks dir` (working tree) | no leaks found |
+| Personal-data scan of text and binary files | nothing found; the only author identity is the project account |
+| Trailer review | 8 frames from `media/cinematic-trailer.mp4` checked by eye (cold open, 中文 ready panel, TC1, gameplay, TC2, near miss, 极光 game-over card, end card) |
