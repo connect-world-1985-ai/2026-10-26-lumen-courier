@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lumen Courier · tests</title>
+<link rel="icon" href="./favicon.svg" type="image/svg+xml">
+<style>
+body { font: 15px/1.5 system-ui, sans-serif; background: #091B26; color: #EEF7F6; margin: 16px; }
+.ok { color: #72E7CC; } .bad { color: #FF8A80; font-weight: 700; }
+button { font: inherit; min-height: 44px; padding: 8px 14px; }
+canvas { width: 216px; height: 384px; display: block; margin-top: 8px; }
+</style>
+</head>
+<body>
+<h1>Lumen Courier · developer tests</h1>
+<p id="summary">Running…</p>
+<ol id="list"></ol>
+<h2>Performance (controller drives production engine + renderer)</h2>
+<p><label>Seconds <input id="secs" type="number" value="120" min="5" max="600"></label> <button id="perf" type="button">Run performance test</button></p>
+<pre id="perfOut"></pre>
+<canvas id="perfCanvas"></canvas>
+<script type="module">
+import { runTests } from "./tests.mjs";
+import { createRun, step, createStepper, advance, C } from "./engine.mjs";
+import { createRenderer } from "./render.mjs";
+const { async } = runTests();
+const results = await async;
+const list = document.getElementById("list");
+let fail = 0;
+for (const r of results) {
+  const li = document.createElement("li");
+  li.className = r.ok ? "ok" : "bad";
+  li.textContent = (r.ok ? "PASS " : "FAIL ") + r.msg;
+  if (!r.ok) fail++;
+  list.append(li);
+}
+document.getElementById("summary").textContent = `${results.length - fail} passed, ${fail} failed`;
+window.__testResults = { total: results.length, failed: fail, results };
+
+function perf(seconds) {
+  return new Promise((resolve) => {
+    const canvas = document.getElementById("perfCanvas");
+    const renderer = createRenderer(canvas);
+    const dpr = Math.min(devicePixelRatio || 1, 2);
+    renderer.resize(Math.round(216 * dpr), Math.round(384 * dpr));
+    let run = createRun(12345);
+    const s = createStepper();
+    const intervals = [], work = [];
+    let last, start, restarts = 0, maxGates = 0, maxParticles = 0;
+    function frame(ts) {
+      if (start === undefined) start = ts;
+      if (last !== undefined) intervals.push(ts - last);
+      last = ts;
+      const w0 = performance.now();
+      const res = advance(s, ts, () => {
+        const g = run.gates.find((x) => !x.passed);
+        const ev = step(run, run.y > g.center + 12 && run.vy > 0);
+        for (const e of ev) renderer.event(e.type, run.y, false);
+        if (run.dead) { run = createRun(restarts++); renderer.reset(); }
+      });
+      if (res < 0) s.accumulator = 0;
+      renderer.update(1 / 60, false);
+      renderer.draw({ y: run.y, vy: run.vy, gates: run.gates, distance: run.distance, bob: 0, reduced: false });
+      work.push(performance.now() - w0);
+      maxGates = Math.max(maxGates, run.gates.length);
+      maxParticles = Math.max(maxParticles, renderer.liveParticles());
+      if (ts - start < seconds * 1000) requestAnimationFrame(frame);
+      else {
+        const p95 = (a) => { const b = [...a].sort((x, y) => x - y); return b[Math.floor(b.length * 0.95)] || 0; };
+        const out = {
+          seconds: ((ts - start) / 1000).toFixed(1), frames: intervals.length,
+          fps: (intervals.length / ((ts - start) / 1000)).toFixed(1),
+          p95IntervalMs: p95(intervals).toFixed(2), p95WorkMs: p95(work).toFixed(2),
+          over50ms: (intervals.filter((x) => x > 50).length / intervals.length * 100).toFixed(2) + "%",
+          maxGates, maxParticles, score: run.score
+        };
+        document.getElementById("perfOut").textContent = JSON.stringify(out, null, 2);
+        window.__perf = out;
+        resolve(out);
+      }
+    }
+    requestAnimationFrame(frame);
+  });
+}
+window.__runPerf = perf;
+document.getElementById("perf").addEventListener("click", () => perf(Number(document.getElementById("secs").value) || 120));
+</script>
+</body>
+</html>

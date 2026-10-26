@@ -1,0 +1,10 @@
+*.log
+*.png
+*.webm
+*.mp4
+*.wav
+.DS_Store
+# Published media is part of the site
+!media/
+!media/*.mp4
+!media/*.jpg

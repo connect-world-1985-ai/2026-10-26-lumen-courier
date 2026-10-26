@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#091B26">
+<title>Lumen Courier</title>
+<meta name="description" content="">
+<link rel="icon" href="./favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="./styles.css">
+<script type="module" src="./app.mjs"></script>
+</head>
+<body>
+<main id="app">
+  <header class="bar">
+    <h1 class="brand"><span class="brand-mark" aria-hidden="true"></span><span data-i18n="title"></span></h1>
+    <nav class="controls" data-i18n-aria="controlsLabel">
+      <button type="button" id="pauseBtn" class="tool" data-i18n="pause" hidden></button>
+      <button type="button" id="soundBtn" class="tool"></button>
+      <button type="button" id="langBtn" class="tool lang"><span class="lang-en">EN</span> / <span class="lang-zh">中文</span></button>
+      <button type="button" id="settingsBtn" class="tool" data-i18n="settings"></button>
+    </nav>
+  </header>
+  <div id="slot">
+    <div id="stage">
+      <canvas id="scene" tabindex="0" data-i18n-aria="canvasLabel" aria-describedby="hintLine"></canvas>
+      <div class="hud" aria-hidden="false">
+        <output id="score" class="score" for="scene">0</output>
+        <span id="bestHud" class="best-hud"></span>
+      </div>
+      <div id="toast" class="toast" aria-hidden="true"></div>
+      <p id="tip" class="tip" aria-hidden="true"></p>
+    </div>
+    <div id="overlay">
+      <section class="card" id="card-boot">
+        <p class="lead" data-i18n="loading"></p>
+      </section>
+      <section class="card" id="card-ready" hidden>
+        <h2 class="title" data-i18n="readyTitle"></h2>
+        <p data-i18n="tagline" class="muted"></p>
+        <p data-i18n="readyHint"></p>
+        <button type="button" class="primary" id="playBtn" data-i18n="start"></button>
+        <p class="small muted" data-i18n="musicHint"></p>
+      </section>
+      <section class="card" id="card-paused" hidden>
+        <h2 class="title" data-i18n="pausedTitle"></h2>
+        <p id="pausedHint"></p>
+        <button type="button" class="primary" id="resumeBtn" data-i18n="resume"></button>
+        <div class="row">
+          <button type="button" class="secondary" id="restartBtn" data-i18n="restart"></button>
+          <button type="button" class="secondary" id="homeBtnP" data-i18n="home"></button>
+        </div>
+      </section>
+      <section class="card" id="card-over" hidden>
+        <h2 class="title" data-i18n="overTitle"></h2>
+        <p id="overScore" class="lead"></p>
+        <p id="overBest" class="muted"></p>
+        <p id="newBest" class="gold" data-i18n="newBest" hidden></p>
+        <p id="medal" class="medal"></p>
+        <p id="overTip" class="small muted"></p>
+        <button type="button" class="primary" id="againBtn" data-i18n="tryAgain"></button>
+        <button type="button" class="secondary" id="homeBtnO" data-i18n="home"></button>
+      </section>
+      <section class="card" id="card-settings" hidden>
+        <h2 class="title" data-i18n="settings"></h2>
+        <div class="setting"><span data-i18n="soundOn" id="soundLabel"></span><button type="button" class="secondary" id="setSound"></button></div>
+        <div class="setting"><span data-i18n="language"></span><button type="button" class="secondary lang" id="setLang"><span class="lang-en">EN</span> / <span class="lang-zh">中文</span></button></div>
+        <div class="setting"><span data-i18n="reducedMotion"></span><button type="button" class="secondary" id="setMotion" aria-pressed="false"></button></div>
+        <p class="small muted" data-i18n="motionHint"></p>
+        <p class="small muted" data-i18n="localOnly"></p>
+        <button type="button" class="primary" id="closeSettings" data-i18n="closeSettings"></button>
+      </section>
+      <section class="card" id="card-unsupported" hidden>
+        <p class="lead" data-i18n="unsupported"></p>
+      </section>
+    </div>
+  </div>
+  <footer class="foot">
+    <p id="hintLine"></p>
+    <p id="notice" class="gold" hidden></p>
+    <p class="small muted"><span data-i18n="credits"></span> · <a href="../LICENSE" data-i18n="license"></a></p>
+  </footer>
+  <p id="live" class="sr-only" aria-live="polite"></p>
+</main>
+</body>
+</html>

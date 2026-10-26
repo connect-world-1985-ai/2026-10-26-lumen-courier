@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#091B26">
+<title>Lumen Courier · 流光信使</title>
+<meta name="description" content="">
+<link rel="icon" href="./play/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="./site.css">
+<script type="module" src="./site.mjs"></script>
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="./"><span class="brand-mark" aria-hidden="true"></span><span data-i18n="name"></span></a>
+  <nav class="topnav" data-i18n-aria="navLabel">
+    <a href="#trailer" data-i18n="navTrailer"></a>
+    <a href="#screens" data-i18n="navScreens"></a>
+    <a href="#how" data-i18n="navHow"></a>
+    <button type="button" id="langBtn" class="lang"><span class="lang-en">EN</span> / <span class="lang-zh">中文</span></button>
+  </nav>
+</header>
+<main>
+  <section class="hero">
+    <div class="hero-text">
+      <p class="eyebrow" data-i18n="eyebrow"></p>
+      <h1><span class="title-en">Lumen Courier</span><span class="title-zh">流光信使</span></h1>
+      <p class="tagline" data-i18n="tagline"></p>
+      <p class="lede" data-i18n="lede"></p>
+      <div class="cta">
+        <a class="btn primary" href="./play/" data-i18n="playNow"></a>
+        <a class="btn secondary" href="#trailer" data-i18n="watchTrailer"></a>
+      </div>
+      <p class="small muted" data-i18n="freeNote"></p>
+    </div>
+    <div class="hero-art">
+      <img src="./media/screenshot-play-en.jpg" width="540" height="960" data-i18n-alt="altPlay" alt="">
+    </div>
+  </section>
+
+  <section id="trailer" class="section">
+    <h2 data-i18n="trailerTitle"></h2>
+    <p class="muted" data-i18n="trailerText"></p>
+    <div class="video-wrap">
+      <video id="trailerVideo" controls playsinline preload="metadata" poster="./media/trailer-poster.jpg" width="1280" height="720">
+        <source src="./media/trailer.mp4" type="video/mp4">
+      </video>
+    </div>
+  </section>
+
+  <section id="screens" class="section">
+    <h2 data-i18n="screensTitle"></h2>
+    <div class="shots">
+      <figure><img src="./media/screenshot-ready-zh.jpg" width="540" height="960" loading="lazy" data-i18n-alt="altReady" alt=""><figcaption data-i18n="capReady"></figcaption></figure>
+      <figure><img src="./media/screenshot-play-en.jpg" width="540" height="960" loading="lazy" data-i18n-alt="altPlay" alt=""><figcaption data-i18n="capPlay"></figcaption></figure>
+      <figure><img src="./media/screenshot-play-zh.jpg" width="540" height="960" loading="lazy" data-i18n-alt="altPlayZh" alt=""><figcaption data-i18n="capPlayZh"></figcaption></figure>
+      <figure><img src="./media/screenshot-over-en.jpg" width="540" height="960" loading="lazy" data-i18n-alt="altOver" alt=""><figcaption data-i18n="capOver"></figcaption></figure>
+    </div>
+  </section>
+
+  <section id="features" class="section">
+    <h2 data-i18n="featuresTitle"></h2>
+    <ul class="features">
+      <li><h3 data-i18n="f1t"></h3><p data-i18n="f1d"></p></li>
+      <li><h3 data-i18n="f2t"></h3><p data-i18n="f2d"></p></li>
+      <li><h3 data-i18n="f3t"></h3><p data-i18n="f3d"></p></li>
+      <li><h3 data-i18n="f4t"></h3><p data-i18n="f4d"></p></li>
+      <li><h3 data-i18n="f5t"></h3><p data-i18n="f5d"></p></li>
+      <li><h3 data-i18n="f6t"></h3><p data-i18n="f6d"></p></li>
+    </ul>
+  </section>
+
+  <section id="how" class="section">
+    <h2 data-i18n="howTitle"></h2>
+    <ol class="how">
+      <li data-i18n="how1"></li>
+      <li data-i18n="how2"></li>
+      <li data-i18n="how3"></li>
+      <li data-i18n="how4"></li>
+    </ol>
+    <table class="keys">
+      <caption class="sr-only" data-i18n="keysCaption"></caption>
+      <tbody>
+        <tr><th scope="row" data-i18n="kFlap"></th><td data-i18n="kFlapKeys"></td></tr>
+        <tr><th scope="row" data-i18n="kPause"></th><td data-i18n="kPauseKeys"></td></tr>
+        <tr><th scope="row" data-i18n="kSound"></th><td data-i18n="kSoundKeys"></td></tr>
+      </tbody>
+    </table>
+    <p class="cta center"><a class="btn primary" href="./play/" data-i18n="playNow"></a></p>
+  </section>
+</main>
+<footer class="foot">
+  <p data-i18n="footCredits"></p>
+  <p class="small muted"><a href="./LICENSE" data-i18n="license"></a> · <span data-i18n="privacy"></span></p>
+</footer>
+</body>
+</html>
