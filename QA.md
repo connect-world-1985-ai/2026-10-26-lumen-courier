@@ -53,7 +53,7 @@ Run on 2026-10-26 against the local preview (`python3 -B preview.py`, `http://12
 | `python3 -B verify.py` | PASS: 56 required files, 33 local references resolve, game runtime 57,256 bytes, no network APIs, no external or absolute URLs |
 | `play/tests.html` | 77 / 77 pass (the game under `/play/` is unchanged) |
 | HTTP | 200 for `/`, `/play/`, both cinematic MP4s, the poster frame, `media/trailer.mp4` and its poster, all 6 poster files, all 14 `media/launch/` files, both fonts and both licences, `/LICENSE` |
-| `media/cinematic-trailer.mp4` | 40.000 s, 1200 frames, H.264 High 1280×720 30 fps + AAC LC 44.1 kHz stereo, moov before mdat, 6,062,909 bytes (v5, re-issued end card); −15.0 LUFS integrated, −1.9 dBFS peak |
+| `media/cinematic-trailer.mp4` | 40.000 s, 1200 frames, H.264 High 1280×720 30 fps + AAC LC 44.1 kHz stereo, moov before mdat, 6,061,208 bytes; −15.0 LUFS integrated, −1.9 dBFS peak |
 | `media/cinematic-trailer-hero.mp4` | same edit, textless, no letterbox; 40.000 s, 1200 frames, same codecs, faststart, 7,069,471 bytes |
 | Hero video (desktop 1440×900 and `Pixel 7`, en-US and zh-CN) | Autoplays muted, looped, inline; currentTime advanced about 2.5 s in 2.5 s; no media error; 1280×720, 40 s. Also autoplays with Chrome's default autoplay policy. Sound toggle unmutes (label switches to "Sound on / 声音已开", `aria-pressed=true`) and mutes again. On phones `object-position` is 68 % 50 % |
 | Reduced motion (`prefers-reduced-motion: reduce`) | No autoplay (paused at 0 s); "▶ Play trailer" shown; clicking it plays the video and hides the button |
@@ -70,13 +70,3 @@ Not tested in phase 2: the live Pages deployment, Safari, Firefox, real phones, 
 | gitleaks 8.30.1, `gitleaks git` (all commits) and `gitleaks dir` (working tree) | no leaks found |
 | Personal-data scan of text and binary files | nothing found; the only author identity is the project account |
 | Trailer review | 8 frames from `media/cinematic-trailer.mp4` checked by eye (cold open, 中文 ready panel, TC1, gameplay, TC2, near miss, 极光 game-over card, end card) |
-
-## Phase 2 follow-up (21:42–22:45): no URLs, no account name in shipped media
-| Check | Result |
-|---|---|
-| Re-issued launch art | poster-01 and poster-03 (WebP + JPG, newest export 21:45) copied; poster-02, stills and wordmark unchanged; `og-image.jpg` and `cinematic-trailer-poster.jpg` are built from still 04 / still 02 + the wordmark, so they did not need rebuilding |
-| `media/cinematic-trailer.mp4` (v5) | rebuilt with the URL-free end card: 40.000 s, 1200 frames, H.264 High 1280×720 30 fps + AAC LC 44.1 kHz stereo, faststart, 6,062,909 bytes |
-| `media/cinematic-trailer-hero.mp4` | textless (no cards), so unchanged |
-| `media/trailer.mp4` (gameplay trailer) | its last caption was the Pages URL; re-rendered with that line replaced by "Play now · 立即游玩" (same video and audio otherwise): 42.5 s, H.264 High 1280×720 + AAC, faststart, 3,211,104 bytes |
-| Site footer | "© 2026 · An original game" / "© 2026 · 一款原创游戏" (no account name); `LICENSE` unchanged |
-| URL / account-name audit | OCR (tesseract) of trailer frames every 0.5 s, hero frames every 1 s, gameplay-trailer frames every 0.5 s, all shipped JPGs, plus a visual check of the end card, title cards, posters and og-image: no URL, domain or account name left. `verify.py` now fails on `github.io` or `connect-world` in the site files |
